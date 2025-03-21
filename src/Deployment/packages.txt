@@ -1,3 +1,4 @@
 libgl1
 ffmpeg
 zlib1g-dev
+libglib2.0-0
