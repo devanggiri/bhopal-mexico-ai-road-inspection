@@ -1,4 +1,5 @@
-import streamlit as st
+import os
+os.system("pip install --no-cache-dir --force-reinstall opencv-python-headless")import streamlit as st
 import streamlit.components.v1 as components 
 import cv2 
 import numpy as np 
@@ -13,7 +14,7 @@ import os
 import shutil
 from ultralytics.yolo.utils.plotting import Annotator
 from cv2 import cvtColor
-import os
+
 
 
 # Define the file path for best.pt
