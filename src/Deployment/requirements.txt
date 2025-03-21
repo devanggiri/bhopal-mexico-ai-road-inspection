@@ -3,12 +3,11 @@ wheel
 numpy>=1.26.0
 imageio==2.26.1
 moviepy==1.0.3
-opencv-python==4.7.0.72
 Pillow==9.5.0
 streamlit>=1.25.0  
 streamlit-option-menu==0.3.2
 ultralytics==8.0.112
-torch
-torchvision
-opencv-python-headless
+torch>=1.9.0
+torchvision>=0.10.0
+opencv-python-headless==4.7.0.72
 requests
