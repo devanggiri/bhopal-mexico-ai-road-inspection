@@ -16,8 +16,25 @@ from cv2 import cvtColor
 import os
 
 
-#Importing the model
-model = YOLO('best.pt')
+# Define the file path for best.pt
+weights_path = "best.pt"
+
+# Google Drive file ID (replace this with your actual file ID)
+file_id = "1ZpSrpjk-k0MPQFt-lXbL1sbupEdRuoF2"  # Replace with your file ID
+download_url = f"https://drive.google.com/uc?id={file_id}"
+
+# Check if best.pt exists; if not, download it
+if not os.path.exists(weights_path):
+    #print("Downloading best.pt from Google Drive...")
+    response = requests.get(download_url, stream=True)
+    with open(weights_path, "wb") as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            f.write(chunk)
+    #print("Download complete!")
+
+model = YOLO(weights_path)
+
+
 def bgr2rgb(image):
     return image[:, :, ::-1]
 
