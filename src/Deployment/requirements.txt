@@ -8,3 +8,12 @@ Pillow==9.5.0
 streamlit==1.2.0
 streamlit_option_menu==0.3.2
 ultralytics==8.0.112
+streamlit
+streamlit-option-menu
+opencv-python
+numpy
+ultralytics
+Pillow
+moviepy
+imageio
+
