@@ -21,47 +21,26 @@ model = YOLO('best.pt')
 def bgr2rgb(image):
     return image[:, :, ::-1]
 
+import imageio
+
 def process_video(video_path):
-    # Load the video
     cap = cv2.VideoCapture(video_path)
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    if fps == 0 or fps is None:
-        fps = 30  # Set a default value for fps if it is 0 or None
-
-    # Create a list to store the processed frames
-    processed_frames = []
-
-    # Process each frame in the video
+    fps = cap.get(cv2.CAP_PROP_FPS) or 30
+    frames = []
+    
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
             break
-
-        # Perform the prediction on the frame
         prediction = model.predict(frame)
-        frame_with_bbox = prediction[0].plot()
-
-        # Convert the frame to PIL Image and store in the list
-        processed_frames.append(Image.fromarray(frame_with_bbox))
+        frames.append(prediction[0].plot())
 
     cap.release()
+    
+    output_path = "output.mp4"
+    imageio.mimsave(output_path, frames, fps=fps)
+    return output_path
 
-    # Create the output video file path
-    video_path_output = "output.mp4"
-
-    # Save the processed frames as individual images
-    with tempfile.TemporaryDirectory() as temp_dir:
-        for i, frame in enumerate(processed_frames):
-            frame.save(f"{temp_dir}/frame_{i}.png")
-
-        # Create a video clip from the processed frames
-        video_clip_path = f"{temp_dir}/clip.mp4"
-        os.system(f"ffmpeg -framerate {fps} -i {temp_dir}/frame_%d.png -c:v libx264 -pix_fmt yuv420p {video_clip_path}")
-
-        # Rename the video clip with the desired output path
-        shutil.copy2(video_clip_path, video_path_output)
-
-    return video_path_output
 
 
 
