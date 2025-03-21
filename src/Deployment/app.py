@@ -1,11 +1,6 @@
-import os
-
-# Ensure required packages are installed (ONLY FOR LOCAL TESTING, REMOVE IN DEPLOYMENT)
-if "STREAMLIT" not in os.environ:
-    os.system("pip install --no-cache-dir --force-reinstall opencv-python-headless ultralytics")
-
 import streamlit as st
-import cv2
+import streamlit.components.v1 as components 
+import cv2 
 import numpy as np 
 from ultralytics import YOLO
 import streamlit_option_menu as option_menu
@@ -18,28 +13,11 @@ import os
 import shutil
 from ultralytics.yolo.utils.plotting import Annotator
 from cv2 import cvtColor
+import os
 
 
-
-# Define the file path for best.pt
-weights_path = "best.pt"
-
-# Google Drive file ID (replace this with your actual file ID)
-file_id = "1ZpSrpjk-k0MPQFt-lXbL1sbupEdRuoF2"  # Replace with your file ID
-download_url = f"https://drive.google.com/uc?id={file_id}"
-
-# Check if best.pt exists; if not, download it
-if not os.path.exists(weights_path):
-    #print("Downloading best.pt from Google Drive...")
-    response = requests.get(download_url, stream=True)
-    with open(weights_path, "wb") as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            f.write(chunk)
-    #print("Download complete!")
-
-model = YOLO(weights_path)
-
-
+#Importing the model
+model = YOLO('best.pt')
 def bgr2rgb(image):
     return image[:, :, ::-1]
 
