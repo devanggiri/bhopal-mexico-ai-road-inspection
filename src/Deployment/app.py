@@ -1,7 +1,8 @@
 import os
 
-# Ensure OpenCV is installed before importing it
-os.system("pip install --no-cache-dir --force-reinstall opencv-python-headless")
+# Ensure required packages are installed (ONLY FOR LOCAL TESTING, REMOVE IN DEPLOYMENT)
+if "STREAMLIT" not in os.environ:
+    os.system("pip install --no-cache-dir --force-reinstall opencv-python-headless ultralytics")
 
 import streamlit as st
 import cv2
