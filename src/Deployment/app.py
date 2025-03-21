@@ -1,7 +1,10 @@
 import os
-os.system("pip install --no-cache-dir --force-reinstall opencv-python-headless")import streamlit as st
-import streamlit.components.v1 as components 
-import cv2 
+
+# Ensure OpenCV is installed before importing it
+os.system("pip install --no-cache-dir --force-reinstall opencv-python-headless")
+
+import streamlit as st
+import cv2
 import numpy as np 
 from ultralytics import YOLO
 import streamlit_option_menu as option_menu
