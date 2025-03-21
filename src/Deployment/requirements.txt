@@ -8,3 +8,5 @@ Pillow==9.5.0
 streamlit>=1.25.0  
 streamlit-option-menu==0.3.2
 ultralytics==8.0.112
+torch
+torchvision
