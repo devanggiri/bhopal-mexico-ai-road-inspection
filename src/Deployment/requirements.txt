@@ -11,3 +11,4 @@ ultralytics==8.0.112
 torch
 torchvision
 opencv-python-headless
+requests
